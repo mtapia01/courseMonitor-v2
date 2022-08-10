@@ -60,5 +60,5 @@ async function main() {
 function sendSMS(client, seatsOpen, course){
     client.messages
     .create({body: 'There are ' + seatsOpen + "seats in " + course, from: '+14054508813', to: '+15595673620'})
-    .then(message => console.log(message.sid));
+    // .then(message => console.log(message.sid));
 };
