@@ -1,10 +1,6 @@
 const puppeteer = require("puppeteer"); // Require Puppeteer module
-// const inquirer = import('inquirer');
-// const fs = require("fs");
 const readline = require("readline");
-// const { google } = require("googleapis");
 const { count } = require("console");
-// const cron = require('node-cron');
 const prompt = require("prompt-sync")();
 const dotenv = require('dotenv');
 dotenv.config()
@@ -47,11 +43,13 @@ async function main() {
   await page.close(); // Close the website
   await browser.close(); // Close the browser
 
+  // Twilio SMS bot
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
 
   const client = require('twilio')(accountSid, authToken);
 
+  // Only reply if one or more seats open
   if(jsonClean.remaining > 0){
     sendSMS(client, jsonClean.remaining, jsonClean.courseName);
   }
